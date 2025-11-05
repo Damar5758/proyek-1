@@ -18,12 +18,14 @@ export default function Statistik() {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        // Ganti URL jika diperlukan
-        const response = await fetch("http://localhost:3001/historiData");
-        const historiApi = await response.json();
-        setHistoriData(historiApi);
+        // Ambil data dari file db.json di folder public
+        const response = await fetch("/db.json");
+        const dataFromFile = await response.json();
+        // Akses property 'historiData' dari object JSON
+        setHistoriData(dataFromFile.historiData || []); // Perbaikan di sini
       } catch (error) {
         console.error("Gagal mengambil data:", error);
+        setHistoriData([]); // Set array kosong jika error
       } finally {
         setIsLoading(false);
       }

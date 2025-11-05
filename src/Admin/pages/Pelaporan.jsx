@@ -62,12 +62,14 @@ export default function Pelaporan() {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        // Ambil data dari API yang sudah kita buat
-        const response = await fetch("http://localhost:3001/historiData");
-        const dataFromApi = await response.json();
-        setMasterData(dataFromApi); // Simpan data mentah ke state
+        // Ambil data dari file db.json di folder public
+        const response = await fetch("/db.json");
+        const dataFromFile = await response.json();
+        // Akses property 'historiData' dari object JSON
+        setMasterData(dataFromFile.historiData || []); // Gunakan array kosong sebagai fallback
       } catch (error) {
         console.error("Gagal mengambil data:", error);
+        setMasterData([]); // Set array kosong jika error
       } finally {
         setIsLoading(false); // Selesai loading
       }

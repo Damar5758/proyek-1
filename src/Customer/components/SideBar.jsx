@@ -34,13 +34,13 @@ export default function Sidebar() {
 
       {/* Navigasi */}
       <nav>
-        <NavItem to="/" icon={Home}>
+        <NavItem to="/Customer" icon={Home}>
           Beranda
         </NavItem>
-        <NavItem to="/riwayat" icon={History}>
+        <NavItem to="/Customer/riwayat" icon={History}>
           Riwayat Pembelian
         </NavItem>
-        <NavItem to="/keranjang" icon={ShoppingCart}>
+        <NavItem to="/Customer/keranjang" icon={ShoppingCart}>
           Keranjang
         </NavItem>
       </nav>

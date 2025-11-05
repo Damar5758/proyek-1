@@ -21,7 +21,7 @@ export default function Sidebar() {
         <ul>
           <li>
             <NavLink
-              to="/Admin/pages/Pelaporan"
+              to="/Admin"
               className={({ isActive }) =>
                 `${linkClasses} ${isActive ? activeClasses : inactiveClasses}`
               }
@@ -33,7 +33,7 @@ export default function Sidebar() {
           </li>
           <li>
             <NavLink
-              to="/Admin/pages/Statistik"
+              to="/Admin/statistik"
               className={({ isActive }) =>
                 `${linkClasses} ${isActive ? activeClasses : inactiveClasses}`
               }

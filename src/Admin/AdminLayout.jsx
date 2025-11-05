@@ -20,15 +20,11 @@ export default function AdminLayout() {
         <Header />
         {/* 5. Konten Halaman (dengan Rute Bersarang) */}
         <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50">
-          {" "}
-          {/* 'Routes' ini akan me-render halaman berdasarkan 
-            link yang sudah kita perbaiki di Sidebar.
-          */}{" "}
           <Routes>
-            {/* /admin akan me-render Pelaporan */}
+            {/* /Admin akan me-render Pelaporan */}
             <Route index element={<Pelaporan />} />
-            {/* /admin/statistik akan me-render Statistik */}
-            <Route path="statistik" element={<Statistik />} />{" "}
+            {/* /Admin/statistik akan me-render Statistik */}
+            <Route path="statistik" element={<Statistik />} />
           </Routes>
         </main>
       </div>
