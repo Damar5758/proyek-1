@@ -1,36 +1,71 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 
+// PATH BERUBAH: Impor dari folder components lokal
+import LoginModal from "./components/LoginModal";
+import Navbar from "./components/NavBar";
+import HeroSection from "./components/HeroSection";
+import FeaturesSection from "./components/FeaturesSection";
+import AboutSection from "./components/AboutSection";
+import Footer from "./components/Footer";
+
+// --- KOMPONEN HOMEPAGE UTAMA ---
 const Homepage = () => {
+  // State dan Logika tetap di sini
+  const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
+  const [isCustomerModalOpen, setIsCustomerModalOpen] = useState(false);
+
+  const handleSmoothScroll = (e) => {
+    e.preventDefault();
+    const href = e.currentTarget.href;
+    const targetId = new URL(href).hash;
+    const targetElement = document.querySelector(targetId);
+
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      {/* Kartu Option */}
-      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-xl shadow-lg">
-        <h1 className="text-3xl font-bold text-center text-gray-900">
-          Selamat Datang
-        </h1>
+    <div className="bg-white text-gray-800">
+      {/* 1. Navbar */}
+      <Navbar
+        onAdminLoginClick={() => setIsAdminModalOpen(true)}
+        onCustomerLoginClick={() => setIsCustomerModalOpen(true)}
+        onSmoothScroll={handleSmoothScroll}
+      />
 
-        <p className="text-center text-gray-600">
-          Silakan pilih peran Anda untuk melanjutkan:
-        </p>
+      {/* 2. Hero */}
+      <HeroSection onSmoothScroll={handleSmoothScroll} />
 
-        {/* Grup Tombol */}
-        <div className="flex flex-col space-y-4">
-          <Link
-            to="/Admin"
-            className="w-full px-4 py-3 text-lg font-semibold text-center text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 transition duration-300 ease-in-out"
-          >
-            Masuk sebagai Admin
-          </Link>
+      {/* 3. Features (Produk) */}
+      <FeaturesSection />
 
-          <Link
-            to="/Customer"
-            className="w-full px-4 py-3 text-lg font-semibold text-center text-white bg-green-600 rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-75 transition duration-300 ease-in-out"
-          >
-            Masuk sebagai Customer
-          </Link>
-        </div>
-      </div>
+      {/* 4. About (Tentang) */}
+      <AboutSection />
+
+      {/* 5. Footer */}
+      <Footer onSmoothScroll={handleSmoothScroll} />
+
+      {/* 6. Modals (tidak terlihat, tapi ada di sini) */}
+      <LoginModal
+        isOpen={isAdminModalOpen}
+        onClose={() => setIsAdminModalOpen(false)}
+        title="Login Admin"
+        loginPath="/Admin"
+        buttonText="Masuk sebagai Admin"
+        buttonStyle="bg-blue-600 hover:bg-blue-700 focus:ring-blue-500"
+      />
+      <LoginModal
+        isOpen={isCustomerModalOpen}
+        onClose={() => setIsCustomerModalOpen(false)}
+        title="Login Customer"
+        loginPath="/Customer"
+        buttonText="Masuk sebagai Customer"
+        buttonStyle="bg-green-600 hover:bg-green-700 focus:ring-green-500"
+      />
     </div>
   );
 };
